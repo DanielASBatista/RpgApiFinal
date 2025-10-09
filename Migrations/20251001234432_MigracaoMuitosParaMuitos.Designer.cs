@@ -463,6 +463,7 @@ namespace RpgApi.Migrations
                     b.Navigation("Personagens");
                 });
 #pragma warning restore 612, 618
+    
         }
     }
 }

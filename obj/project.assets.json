@@ -4898,19 +4898,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\I\\.nuget\\packages\\": {}
+    "C:\\Users\\danie\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\ETEC\\2DS\\DS\\RpgApi\\RpgApi.csproj",
+      "projectUniqueName": "D:\\Repositórios\\VisualStudioCode\\ApiRPG\\RpgApi.csproj",
       "projectName": "RpgApi",
-      "projectPath": "E:\\ETEC\\2DS\\DS\\RpgApi\\RpgApi.csproj",
-      "packagesPath": "C:\\Users\\I\\.nuget\\packages\\",
-      "outputPath": "E:\\ETEC\\2DS\\DS\\RpgApi\\obj\\",
+      "projectPath": "D:\\Repositórios\\VisualStudioCode\\ApiRPG\\RpgApi.csproj",
+      "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
+      "outputPath": "D:\\Repositórios\\VisualStudioCode\\ApiRPG\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\I\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\danie\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -4978,7 +4978,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

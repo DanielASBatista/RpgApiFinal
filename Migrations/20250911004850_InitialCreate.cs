@@ -12,7 +12,7 @@ namespace RpgApi.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
+            /*migrationBuilder.CreateTable(
                 name: "TB_PERSONAGENS",
                 columns: table => new
                 {
@@ -28,7 +28,7 @@ namespace RpgApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TB_PERSONAGENS", x => x.Id);
-                });
+                });*/
 
             migrationBuilder.InsertData(
                 table: "TB_PERSONAGENS",
