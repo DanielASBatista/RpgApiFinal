@@ -1,10 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Identity.Client;
 using RpgApi.Models.Enuns;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace RpgApi.Models
@@ -28,6 +22,7 @@ namespace RpgApi.Models
         public int Disputas { get; set; }
         public int Vitorias { get; set; }
         public int Derrotas { get; set; }
+        [JsonIgnore]        
         public List<PersonagemHabilidade> PersonagemHabilidades {get;set;} = [];
     }
 }

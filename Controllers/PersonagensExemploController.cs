@@ -75,33 +75,5 @@ namespace RpgApi.Controllers
             personagens.RemoveAll(pers => pers.Id == id);
             return Ok(personagens);
         }
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

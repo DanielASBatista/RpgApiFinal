@@ -26,8 +26,12 @@ namespace RpgApi.Controllers
         {
             try
             {
-                Personagem p = await _context.TB_PERSONAGENS.Include(ar=> ar.Arma).Include(ph => ph.PersonagemHabilidades)                
-                    .ThenInclude(h => h.Habilidade).FirstOrDefaultAsync(pBusca => pBusca.Id == id);
+                Personagem p = await _context.TB_PERSONAGENS
+                .Include(ar=> ar.Arma)
+                .Include(us=> us.Usuario)
+                .Include(ph => ph.PersonagemHabilidades)                
+                    .ThenInclude(h => h.Habilidade)
+                .FirstOrDefaultAsync(pBusca => pBusca.Id == id);
 
                 return Ok(p);
             }
@@ -43,6 +47,8 @@ namespace RpgApi.Controllers
             try
             {
                 List<Personagem> lista = await _context.TB_PERSONAGENS.ToListAsync();
+                
+                
                 return Ok(lista);
             }
             catch (System.Exception ex)
@@ -99,11 +105,93 @@ namespace RpgApi.Controllers
                 return BadRequest(ex.Message + " - " + ex.InnerException);
             }
         }
+        [HttpPut("RestaurarPontosVida")]
+        public async Task<IActionResult> RestaurarPontosVidaAsync(Personagem p)
+        {
+            try
+            {
+                int linhasAfetadas = 0;
+                Personagem? pEncontrado =
+                await _context.TB_PERSONAGENS.FirstOrDefaultAsync(pBusca => pBusca.Id == p.Id);
+                pEncontrado.PontosVida = 100;
 
+                bool atualizou = await TryUpdateModelAsync<Personagem>(pEncontrado, "p",
+                    pAtualizar => pAtualizar.PontosVida);
+                // EF vai detectar e atualizar apenas as colunas que foram alteradas. 
+                if (atualizou)
+                    linhasAfetadas = await _context.SaveChangesAsync();
 
+                return Ok(linhasAfetadas);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpPut("ZerarRanking")]
+        public async Task<IActionResult> ZerarRankingAsync(Personagem p)
+        {
+            try
+            {
+                Personagem pEncontrado =
+                  await _context.TB_PERSONAGENS.FirstOrDefaultAsync(pBusca => pBusca.Id == p.Id);
 
+                pEncontrado.Disputas = 0;
+                pEncontrado.Vitorias = 0;
+                pEncontrado.Derrotas = 0;
+                int linhasAfetadas = 0;
 
+                bool atualizou = await TryUpdateModelAsync<Personagem>(pEncontrado, "p",
+                    pAtualizar => pAtualizar.Disputas,
+                    pAtualizar => pAtualizar.Vitorias,
+                    pAtualizar => pAtualizar.Derrotas);
 
+                // EF vai detectar e atualizar apenas as colunas que foram alteradas. 
+                if (atualizou)
+                    linhasAfetadas = await _context.SaveChangesAsync();
 
+                return Ok(linhasAfetadas);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpPut("Reboot")]
+        public async Task<IActionResult> RebootAsync()
+        {
+            try
+            {
+                List<Personagem> lista =
+                await _context.TB_PERSONAGENS.ToListAsync();
+
+                foreach (Personagem p in lista)
+                {
+                    await ZerarRankingAsync(p);
+                    await RestaurarPontosVidaAsync(p);
+                }
+                return Ok();
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet("GetByNomeAproximado/{nomePersonagem}")] 
+        public async Task<IActionResult> GetByNomeAproximado(string nomePersonagem) 
+        { 
+            try 
+            { 
+                List<Personagem> lista = await _context.TB_PERSONAGENS 
+                    .Where(p => p.Nome.ToLower().Contains(nomePersonagem.ToLower())) 
+                    .ToListAsync(); 
+ 
+                return Ok(lista); 
+            } 
+            catch (System.Exception ex) 
+            { 
+                return BadRequest(ex.Message); 
+            } 
+        }        
     }
 }

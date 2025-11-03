@@ -99,6 +99,36 @@ namespace RpgApi.Migrations
                         });
                 });
 
+            modelBuilder.Entity("RpgApi.Models.Disputa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AtacanteId")
+                        .HasColumnType("int")
+                        .HasColumnName("AtacanteId");
+
+                    b.Property<DateTime?>("DataDisputa")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("Dt_Disputa");
+
+                    b.Property<string>("Narracao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Tx_Narracao");
+
+                    b.Property<int>("OponenteId")
+                        .HasColumnType("int")
+                        .HasColumnName("OponenteId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TB_DISPUTAS", (string)null);
+                });
+
             modelBuilder.Entity("RpgApi.Models.Habilidade", b =>
                 {
                     b.Property<int>("Id")
@@ -380,7 +410,9 @@ namespace RpgApi.Migrations
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Perfil")
-                        .HasColumnType("nvarchar(max)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("Jogadô");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -397,8 +429,8 @@ namespace RpgApi.Migrations
                             Email = "seuEmail@gmail.com",
                             Latitude = -23.520024100000001,
                             Longitude = -46.596497999999997,
-                            PasswordHash = new byte[] { 98, 241, 147, 181, 207, 86, 6, 112, 208, 143, 169, 44, 145, 115, 132, 243, 178, 252, 102, 248, 61, 177, 116, 97, 188, 65, 177, 12, 113, 92, 9, 192, 161, 6, 201, 89, 43, 34, 156, 162, 205, 133, 68, 104, 125, 37, 136, 68, 61, 160, 172, 57, 98, 107, 199, 188, 152, 228, 218, 202, 176, 38, 86, 233 },
-                            PasswordSalt = new byte[] { 141, 185, 202, 195, 6, 149, 168, 167, 194, 146, 79, 109, 42, 209, 179, 120, 60, 112, 97, 93, 15, 76, 141, 169, 54, 157, 166, 108, 125, 244, 164, 3, 159, 54, 71, 161, 194, 229, 151, 163, 240, 207, 121, 3, 198, 77, 158, 158, 66, 22, 238, 146, 199, 37, 208, 78, 151, 139, 85, 104, 21, 123, 226, 44, 141, 209, 255, 107, 56, 251, 28, 211, 14, 162, 189, 162, 99, 160, 242, 222, 117, 56, 15, 243, 92, 138, 46, 165, 97, 237, 120, 69, 165, 134, 13, 15, 99, 255, 240, 149, 62, 163, 49, 94, 161, 120, 193, 76, 66, 123, 13, 15, 20, 137, 13, 115, 190, 196, 82, 133, 161, 64, 196, 79, 234, 231, 189, 175 },
+                            PasswordHash = new byte[] { 110, 138, 28, 164, 8, 221, 233, 153, 186, 59, 15, 72, 206, 251, 226, 226, 117, 133, 253, 75, 211, 0, 198, 28, 118, 187, 150, 95, 162, 49, 114, 181, 147, 70, 140, 198, 20, 119, 46, 221, 113, 30, 190, 168, 228, 132, 85, 191, 37, 184, 94, 200, 255, 55, 214, 241, 238, 60, 101, 206, 130, 195, 26, 122 },
+                            PasswordSalt = new byte[] { 151, 221, 208, 119, 28, 93, 78, 36, 171, 160, 246, 73, 7, 6, 140, 202, 54, 17, 36, 230, 86, 10, 36, 46, 101, 64, 156, 208, 206, 33, 29, 182, 12, 255, 79, 219, 211, 31, 73, 156, 215, 3, 223, 232, 206, 196, 54, 218, 193, 227, 84, 4, 137, 232, 182, 101, 208, 4, 57, 187, 238, 3, 152, 78, 162, 197, 70, 95, 94, 122, 227, 104, 55, 74, 0, 159, 214, 207, 233, 202, 140, 182, 71, 20, 18, 150, 233, 20, 61, 230, 255, 115, 19, 229, 161, 117, 186, 247, 80, 113, 187, 164, 130, 186, 88, 69, 228, 9, 51, 154, 59, 26, 58, 35, 233, 117, 244, 74, 179, 229, 196, 187, 45, 151, 144, 85, 255, 81 },
                             Perfil = "Admin",
                             Username = "UsuarioAdmin"
                         });

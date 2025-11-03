@@ -12,8 +12,8 @@ using RpgApi.Data;
 namespace RpgApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20251001234432_MigracaoMuitosParaMuitos")]
-    partial class MigracaoMuitosParaMuitos
+    [Migration("20251101193539_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -100,6 +100,36 @@ namespace RpgApi.Migrations
                             Nome = "El machete",
                             PersonagemId = 7
                         });
+                });
+
+            modelBuilder.Entity("RpgApi.Models.Disputa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AtacanteId")
+                        .HasColumnType("int")
+                        .HasColumnName("AtacanteId");
+
+                    b.Property<DateTime?>("DataDisputa")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("Dt_Disputa");
+
+                    b.Property<string>("Narracao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Tx_Narracao");
+
+                    b.Property<int>("OponenteId")
+                        .HasColumnType("int")
+                        .HasColumnName("OponenteId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TB_DISPUTAS", (string)null);
                 });
 
             modelBuilder.Entity("RpgApi.Models.Habilidade", b =>
@@ -383,7 +413,9 @@ namespace RpgApi.Migrations
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Perfil")
-                        .HasColumnType("nvarchar(max)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("Jogadô");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -400,8 +432,8 @@ namespace RpgApi.Migrations
                             Email = "seuEmail@gmail.com",
                             Latitude = -23.520024100000001,
                             Longitude = -46.596497999999997,
-                            PasswordHash = new byte[] { 20, 12, 35, 175, 88, 232, 183, 247, 172, 241, 105, 233, 73, 46, 131, 97, 170, 72, 225, 128, 85, 25, 14, 15, 121, 198, 89, 55, 111, 87, 105, 47, 114, 14, 141, 25, 186, 242, 79, 83, 250, 226, 122, 242, 63, 44, 208, 78, 125, 135, 127, 27, 165, 125, 59, 74, 147, 129, 28, 174, 136, 5, 58, 157 },
-                            PasswordSalt = new byte[] { 202, 30, 96, 64, 56, 4, 67, 4, 92, 170, 231, 195, 89, 137, 173, 179, 4, 236, 194, 16, 208, 131, 100, 174, 163, 220, 71, 129, 65, 243, 183, 168, 49, 209, 2, 0, 101, 155, 101, 239, 58, 174, 116, 52, 73, 154, 28, 121, 45, 228, 135, 4, 231, 207, 98, 72, 192, 3, 58, 249, 116, 218, 212, 6, 1, 96, 3, 218, 233, 193, 21, 138, 136, 68, 211, 237, 165, 139, 99, 106, 9, 25, 40, 170, 96, 189, 213, 98, 49, 162, 106, 241, 228, 226, 164, 210, 161, 66, 141, 47, 44, 2, 207, 19, 173, 157, 221, 183, 135, 207, 12, 209, 86, 79, 231, 196, 3, 253, 173, 27, 114, 184, 8, 33, 198, 95, 105, 9 },
+                            PasswordHash = new byte[] { 110, 138, 28, 164, 8, 221, 233, 153, 186, 59, 15, 72, 206, 251, 226, 226, 117, 133, 253, 75, 211, 0, 198, 28, 118, 187, 150, 95, 162, 49, 114, 181, 147, 70, 140, 198, 20, 119, 46, 221, 113, 30, 190, 168, 228, 132, 85, 191, 37, 184, 94, 200, 255, 55, 214, 241, 238, 60, 101, 206, 130, 195, 26, 122 },
+                            PasswordSalt = new byte[] { 151, 221, 208, 119, 28, 93, 78, 36, 171, 160, 246, 73, 7, 6, 140, 202, 54, 17, 36, 230, 86, 10, 36, 46, 101, 64, 156, 208, 206, 33, 29, 182, 12, 255, 79, 219, 211, 31, 73, 156, 215, 3, 223, 232, 206, 196, 54, 218, 193, 227, 84, 4, 137, 232, 182, 101, 208, 4, 57, 187, 238, 3, 152, 78, 162, 197, 70, 95, 94, 122, 227, 104, 55, 74, 0, 159, 214, 207, 233, 202, 140, 182, 71, 20, 18, 150, 233, 20, 61, 230, 255, 115, 19, 229, 161, 117, 186, 247, 80, 113, 187, 164, 130, 186, 88, 69, 228, 9, 51, 154, 59, 26, 58, 35, 233, 117, 244, 74, 179, 229, 196, 187, 45, 151, 144, 85, 255, 81 },
                             Perfil = "Admin",
                             Username = "UsuarioAdmin"
                         });
@@ -463,7 +495,6 @@ namespace RpgApi.Migrations
                     b.Navigation("Personagens");
                 });
 #pragma warning restore 612, 618
-    
         }
     }
 }
