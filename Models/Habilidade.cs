@@ -12,7 +12,7 @@ namespace RpgApi.Models
         public string Nome { get; set; } = String.Empty;
         public int Dano { get; set; }
         [JsonIgnore]
-        public List<PersonagemHabilidade> PersonagemHabilidades {get;set;} = [];
+        public List<PersonagemHabilidade> PersonagemHabilidades {get;set;} = new();
         
     }
 }

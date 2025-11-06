@@ -12,6 +12,7 @@ namespace RpgApi.Models
         [JsonIgnore]
         public Personagem? Personagem { get; set; } = null!;
         public int HabilidadeId { get; set; }
+        [JsonIgnore]
         public Habilidade? Habilidade { get; set; } = null!;
     }
 }

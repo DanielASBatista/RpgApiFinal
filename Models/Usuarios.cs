@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 
 namespace RpgApi.Models
@@ -21,7 +22,8 @@ namespace RpgApi.Models
         [NotMapped]//DataAnnotations
         public string PasswordString { get; set; } = string.Empty;
 
-        public List<Personagem> Personagens { get; set; }
+        [JsonIgnore]
+        public List<Personagem>? Personagens { get; set; }
            = new List<Personagem>();
 
         public string? Perfil { get; set; }
